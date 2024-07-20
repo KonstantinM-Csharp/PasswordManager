@@ -1,6 +1,6 @@
 using PasswordManager.Core.Interfaces;
 using PasswordManager.DAL;
-using PasswordManager.DAL.Entities;
+using PasswordManager.Core.Entities;
 using PasswordManager.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

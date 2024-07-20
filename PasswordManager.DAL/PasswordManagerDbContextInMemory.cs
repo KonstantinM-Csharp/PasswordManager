@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PasswordManager.DAL.Entities;
+using PasswordManager.Core.Entities;
 
 namespace PasswordManager.DAL;
 
