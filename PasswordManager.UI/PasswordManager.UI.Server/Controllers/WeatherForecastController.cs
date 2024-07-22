@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PasswordManager.ClientApp.Server.Controllers
+namespace PasswordManager.UI.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

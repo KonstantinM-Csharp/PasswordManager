@@ -33,5 +33,5 @@ export class AppComponent implements OnInit {
     );
   }
 
-  title = 'passwordmanager.clientapp.client';
+  title = 'passwordmanager.ui.client';
 }

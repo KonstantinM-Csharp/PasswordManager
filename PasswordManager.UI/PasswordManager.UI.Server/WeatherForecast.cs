@@ -1,4 +1,4 @@
-namespace PasswordManager.ClientApp.Server
+namespace PasswordManager.UI.Server
 {
     public class WeatherForecast
     {

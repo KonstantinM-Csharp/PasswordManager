@@ -73,7 +73,7 @@ namespace PasswordManager.API.Controllers
                 CreationTime = DateTime.Now.AddDays(-25),
                 TypePassword = "Site"
             },
-            new PasswordEntity
+            new PasswordEntity  
             {
                 Name = "anotheruser2@example.com",
                 Password = "Password9",
