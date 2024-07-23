@@ -5,7 +5,7 @@ using PasswordManager.Core.Interfaces;
 namespace PasswordManager.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PasswordController : ControllerBase
     {
         private readonly ILogger<PasswordController> _logger;

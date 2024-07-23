@@ -1,0 +1,10 @@
+<div class="panel">
+  <app-search-bar (search)="handleSearch($event)" (add)="openAddPasswordModal()"></app-search-bar>
+</div>
+<div class="passwords">
+  <app-password-list></app-password-list>
+</div>
+<app-adding-password-window [isOpen]="isModalOpen"
+                            (onClose)="closeModal()"
+                            (onAdd)="reloadPasswords(passwordList)">
+</app-adding-password-window>
