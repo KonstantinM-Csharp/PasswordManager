@@ -1,40 +1,44 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { IPasssword } from '../models/ipassword';
 import { PasswordService } from '../services/passwordservice ';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { ModalService } from '../services/ModalService';
 
 @Component({
   selector: 'app-adding-password-window',
   templateUrl: './adding-password-window.component.html',
   styleUrl: './adding-password-window.component.css'
 })
-export class AddingPasswordWindowComponent {
+export class AddingPasswordWindowComponent implements OnInit, OnDestroy {
+  isOpen = false;
+  private modalSubscription!: Subscription;
 
-  @Input() isOpen = true;
-  @Output() onClose = new EventEmitter<void>();
-  @Output() onAdd = new EventEmitter<void>();
-  newPassword: IPasssword = {
-    id: 0,
-    name: '',
-    password: '',
-    creationTime: new Date(),
-    typePassword: 'site'
-  };
+  title: string = '';
+  password: string = '';
+  type: string = 'site'; // default value
 
-  constructor(private passwordService: PasswordService) { }
+  constructor(private modalService: ModalService) { }
 
-  closeModal(): void {
-    this.isOpen = false;
-    this.onClose.emit();
+  ngOnInit() {
+    this.modalSubscription = this.modalService.isModalOpen$.subscribe(isOpen => {
+      this.isOpen = isOpen;
+    });
   }
 
-  addPassword(): void {
-    this.passwordService.addPassword(this.newPassword).subscribe(
-      () => {
-        this.onAdd.emit();
-        this.closeModal();
-      },
-      (error: any) => console.error('Error adding password', error)
-    );
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
+  }
+
+  closeModal() {
+    this.modalService.closeModal();
+  }
+
+  onSubmit() {
+    // Здесь можно добавить логику для сохранения пароля
+    console.log('Title:', this.title);
+    console.log('Password:', this.password);
+    console.log('Type:', this.type);
+    this.closeModal();
   }
 }
 

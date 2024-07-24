@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IPasssword } from '../models/ipassword';
+import { ModalService } from '../services/ModalService';
 
 @Component({
   selector: 'app-password-item',
@@ -8,4 +9,9 @@ import { IPasssword } from '../models/ipassword';
 })
 export class PasswordItemComponent {
   @Input() password!: IPasssword;
+  constructor(private modalService: ModalService) { }
+
+  openModal() {
+    this.modalService.openModal();
+  }
 }

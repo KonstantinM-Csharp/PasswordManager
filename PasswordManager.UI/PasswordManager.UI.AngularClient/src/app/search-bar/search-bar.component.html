@@ -2,12 +2,12 @@
   <div class="row justify-content-center my-5">
     <div class="col-12 col-md-6">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Имя пароля..." #searchInput (input)="onSearch(searchInput.value)">
+        <input type="text" class="form-control" placeholder="Имя пароля...">
         <div class="input-group-append">
           <button class="btn btn-primary" (click)="findPassword()">Найти</button>
         </div>
         <div class="input-group-append ml-auto">
-          <button class="btn btn-success"  (click)="openAddPasswordModal()">Добавить</button>
+          <button class="btn btn-success"  (click)="openModal()">Добавить</button>
         </div>
       </div>
     </div>
