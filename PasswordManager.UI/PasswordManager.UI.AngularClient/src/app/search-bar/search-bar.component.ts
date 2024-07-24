@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ModalService } from '../services/ModalService';
+import { ModalService } from '../services/modalservice';
 
 @Component({
   selector: 'app-search-bar',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPasssword } from '../models/ipassword';
+import { IPassword } from '../models/ipassword';
 import { PasswordService } from '../services/passwordservice ';
 
 @Component({
@@ -8,7 +8,7 @@ import { PasswordService } from '../services/passwordservice ';
   styleUrls: ['./password-list.component.css'] // Corrected property name
 })
 export class PasswordListComponent implements OnInit {
-  passwords: IPasssword[] = [];
+  passwords: IPassword[] = [];
   isModalOpen = false;
 
   constructor(private passwordService: PasswordService) { }
@@ -19,14 +19,14 @@ export class PasswordListComponent implements OnInit {
 
   loadPasswords(): void {
     this.passwordService.getPasswords().subscribe(
-      (data: IPasssword[]) => this.passwords = data,
+      (data: IPassword[]) => this.passwords = data,
       (error: any) => console.error('Error fetching passwords', error)
     );
   }
 
   handleSearch(searchTerm: string): void {
     this.passwordService.searchPasswords(searchTerm).subscribe(
-      (data: IPasssword[]) => this.passwords = data,
+      (data: IPassword[]) => this.passwords = data,
       (error: any) => console.error('Error searching passwords', error)
     );
   }

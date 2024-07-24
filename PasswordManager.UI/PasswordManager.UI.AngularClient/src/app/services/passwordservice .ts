@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IPasssword } from '../models/ipassword';
+import { IPassword } from '../models/ipassword';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,15 @@ export class PasswordService {
 
   constructor(private http: HttpClient) { }
 
-  getPasswords(): Observable<IPasssword[]> {
-    return this.http.get<IPasssword[]>(this.apiUrl);
+  getPasswords(): Observable<IPassword[]> {
+    return this.http.get<IPassword[]>(this.apiUrl);
   }
 
-  searchPasswords(name: string): Observable<IPasssword[]> {
-    return this.http.get<IPasssword[]>(`${this.getPasswordByNameApiUrl}/namePassword=${name}`);
+  searchPasswords(name: string): Observable<IPassword[]> {
+    return this.http.get<IPassword[]>(`${this.getPasswordByNameApiUrl}/namePassword=${name}`);
   }
 
-  addPassword(password: IPasssword): Observable<void> {
+  addPassword(password: IPassword): Observable<void> {
     return this.http.post<void>(this.apiUrl, password);
   }
   }

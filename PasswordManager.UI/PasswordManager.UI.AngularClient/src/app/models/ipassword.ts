@@ -1,4 +1,4 @@
-export interface IPasssword {
+export interface IPassword {
   id: number;
   name: string;
   password: string;

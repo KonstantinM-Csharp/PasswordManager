@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { IPasssword } from '../models/ipassword';
-import { ModalService } from '../services/ModalService';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IPassword } from '../models/ipassword';
+import { ModalService } from '../services/modalservice';
 
 @Component({
   selector: 'app-password-item',
@@ -8,10 +8,12 @@ import { ModalService } from '../services/ModalService';
   styleUrls: ['./password-item.component.css']
 })
 export class PasswordItemComponent {
-  @Input() password!: IPasssword;
+  @Input() password!: IPassword;
+  @Output() editPassword = new EventEmitter<IPassword>();
+
   constructor(private modalService: ModalService) { }
 
-  openModal() {
-    this.modalService.openModal();
+  onEdit() {
+    this.modalService.openModal(this.password);
   }
 }

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { IPasssword } from '../models/ipassword';
+import { IPassword } from '../models/ipassword';
 import { PasswordService } from '../services/passwordservice ';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ModalService } from '../services/ModalService';
+import { ModalService } from '../services/modalservice';
 
 @Component({
   selector: 'app-adding-password-window',
@@ -12,21 +12,32 @@ import { ModalService } from '../services/ModalService';
 export class AddingPasswordWindowComponent implements OnInit, OnDestroy {
   isOpen = false;
   private modalSubscription!: Subscription;
+  private passwordSubscription!: Subscription;
 
-  title: string = '';
+  name: string = '';
   password: string = '';
-  type: string = 'site'; // default value
+  type: string = 'site';
 
-  constructor(private modalService: ModalService) { }
-
+  constructor(private modalService: ModalService, private passwordService : PasswordService ) { }
   ngOnInit() {
     this.modalSubscription = this.modalService.isModalOpen$.subscribe(isOpen => {
       this.isOpen = isOpen;
+    });
+
+    this.passwordSubscription = this.modalService.currentPassword$.subscribe(password => {
+      if (password) {
+        this.name = password.name;
+        this.password = password.password;
+        this.type = password.typePassword;
+      } else {
+        this.resetForm();
+      }
     });
   }
 
   ngOnDestroy() {
     this.modalSubscription.unsubscribe();
+    this.passwordSubscription.unsubscribe();
   }
 
   closeModal() {
@@ -34,11 +45,14 @@ export class AddingPasswordWindowComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // Здесь можно добавить логику для сохранения пароля
-    console.log('Title:', this.title);
-    console.log('Password:', this.password);
-    console.log('Type:', this.type);
+    const passwordData = { name: this.name, password: this.password, typePassword: this.type };
     this.closeModal();
+  }
+
+  resetForm() {
+    this.name = '';
+    this.password = '';
+    this.type = 'site';
   }
 }
 
