@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPassword } from '../models/ipassword';
+import { PasswordEntity } from '../models/passwordentity';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,8 @@ export class PasswordService {
   searchPasswords(name: string): Observable<IPassword[]> {
     return this.http.get<IPassword[]>(`${this.getPasswordByNameApiUrl}/namePassword=${name}`);
   }
-
-  addPassword(password: IPassword): Observable<void> {
-    return this.http.post<void>(this.apiUrl, password);
+  addPassword(passwordEntity: PasswordEntity): Observable<any> {
+    return this.http.post(this.apiUrl, passwordEntity);
   }
   }
 

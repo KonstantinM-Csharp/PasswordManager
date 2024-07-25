@@ -3,6 +3,7 @@ import { IPassword } from '../models/ipassword';
 import { PasswordService } from '../services/passwordservice ';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ModalService } from '../services/modalservice';
+import { PasswordEntity } from '../models/passwordentity';
 
 @Component({
   selector: 'app-adding-password-window',
@@ -13,7 +14,7 @@ export class AddingPasswordWindowComponent implements OnInit, OnDestroy {
   isOpen = false;
   private modalSubscription!: Subscription;
   private passwordSubscription!: Subscription;
-
+  passwordData!: IPassword;
   name: string = '';
   password: string = '';
   type: string = 'site';
@@ -45,7 +46,20 @@ export class AddingPasswordWindowComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const passwordData = { name: this.name, password: this.password, typePassword: this.type };
+    const passwordEntity: PasswordEntity = {
+      id: 0,
+      name: this.name,
+      password: this.password,
+      typePassword: this.type,
+      creationTime: new Date()
+    };
+
+    this.passwordService.addPassword(passwordEntity).subscribe(response => {
+      console.log('Password added successfully:', response);
+    }, error => {
+      console.error('Error adding password:', error);
+    });
+  
     this.closeModal();
   }
 
